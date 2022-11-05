@@ -49,8 +49,5 @@ export async function getPosts() {
 
 export async function getPost(id: string) {
   const posts = await getPublishedPosts();
-  if (import.meta.env.DEV) {
-    posts.push(...await getDrafts())
-  }
   return posts.find((post) => post.name === id)!;
 }
