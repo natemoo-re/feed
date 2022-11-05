@@ -9,14 +9,9 @@ export interface Post {
   content: string;
 }
 
-if (import.meta.hot) {
-  import.meta.glob('../../../posts/**/*.md');
-  import.meta.glob('../../../drafts/**/*.md');
-}
-
 async function read(dir: URL): Promise<Post[]> {
   const base = fileURLToPath(dir);
-  const entries = await glob(base + "**", { absolute: true });
+  const entries = await glob(base + "**", { absolute: true, followSymbolicLinks: true });
   return await Promise.all(
     entries.map((file) =>
       fs.readFile(file, { encoding: "utf-8" }).then((doc) => {
@@ -31,24 +26,18 @@ async function read(dir: URL): Promise<Post[]> {
   ) as Post[];
 }
 
-export async function getDrafts() {
-  const drafts = await read(new URL("../../../drafts/", import.meta.url));
-  for (const entry of drafts) {
-    entry.data.draft = true;
-  }
-  return drafts;
-}
-
 export async function getPublishedPosts() {
-  const drafts = await read(new URL("../../../posts/", import.meta.url));
-  return drafts;
+  let posts: Post[] = [];
+  if (import.meta.env.PROD) {
+    posts = await read(new URL("../../posts/", import.meta.url));
+  } else {
+    posts = await read(new URL("../../../posts/", import.meta.url));
+  }
+  return posts;
 }
 
 export async function getPosts() {
   const posts = await getPublishedPosts();
-  if (import.meta.env.DEV) {
-    posts.push(...await getDrafts())
-  }
   return posts.sort((a, b) => {
     const aDate = a.data.date.valueOf();
     const bDate = b.data.date.valueOf();
