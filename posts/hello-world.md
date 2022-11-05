@@ -1,3 +1,10 @@
-Hello world!
+---
+title: Hello world!
+date: 2022-11-04T21:25:06.892Z
+---
 
-This is an experiment with GitHub + Astro to make a personalized Twitter clone.
+Twitter's going up in flames. Mastodon seems lame. Blogging is a lot of pressure.
+
+I figured it would be fun to share extra-small and small thoughts on my own personal feed, so here's this.
+
+Follow along at [feed.nmoo.dev](https://feed.nmoo.dev)!

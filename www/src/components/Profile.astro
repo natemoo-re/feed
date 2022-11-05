@@ -1,0 +1,120 @@
+---
+import config from "../../../config.json";
+import Avatar from "./Avatar.astro";
+import Link from "../icons/link.astro";
+import User from "../icons/user.astro";
+import Location from "../icons/location.astro";
+import { Markdown } from "astro-remote";
+---
+
+<article>
+  <div class="hero"></div>
+  <Avatar size="large" border />
+  <main>
+    <div>
+      <h1>{config.profile.name}</h1>
+      <h2>@{config.handle}</h2>
+    </div>
+    <div>
+      <ul>
+        {
+          Object.entries(config.bio).map(([key, value]) => (
+            <li>
+              <span>{key}</span>
+              <Markdown content={value} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </main>
+  <footer>
+    <ul>
+      <li><User />{config.profile.pronouns}</li>
+      <li><Location />{config.profile.location}</li>
+      <li>
+        <Link /><a
+          href={`https://${config.profile.website.replace(/https?\:\/\//, "")}`}
+          >{config.profile.website}</a
+        >
+      </li>
+    </ul>
+  </footer>
+</article>
+
+<style>
+  article {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid var(--color-border);
+    border-bottom: 0;
+  }
+  .hero {
+    height: 6rem;
+    background-image: linear-gradient(120deg, #a18cd1 0%, #fbc2eb 100%);
+    margin: -1rem;
+    margin-bottom: -3rem;
+  }
+  article {
+    padding: 1rem;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  h2 {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+  li > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  li > :global(p) {
+    display: inline;
+  }
+  footer {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding: 1rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    background: linear-gradient(
+      to bottom,
+      rgb(18 18 18),
+      rgb(18 18 18) 80%,
+      rgb(18 18 18 / 0%)
+    );
+    z-index: 2;
+  }
+  footer > ul {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  footer li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+  footer :global(svg) {
+    --size: 1.25rem;
+    width: var(--size);
+    height: var(--size);
+  }
+</style>

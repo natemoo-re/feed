@@ -1,0 +1,68 @@
+---
+import Bell from "../icons/bell.astro";
+import Warning from "../icons/warning.astro";
+
+interface Props {
+  type: "note" | "warning";
+}
+const { type } = Astro.props;
+---
+
+<div class:list={{ note: true, [`type-${type}`]: true }}>
+  {
+    type === "note" && (
+      <span class="label">
+        <Bell />
+        <span>Note</span>
+      </span>
+    )
+  }
+  {
+    type === "warning" && (
+      <span class="label">
+        <Warning />
+        <span>Warning</span>
+      </span>
+    )
+  }
+  <div class="body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .note {
+    margin-top: 0.5rem;
+    max-width: 100%;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    padding: 0.25rem 0.5rem;
+    background: var(--background);
+    border-left: 4px solid var(--color);
+  }
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--background);
+    margin: -0.25rem -0.5rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .label :global(svg) {
+    --size: 1.25rem;
+    width: var(--size);
+    height: var(--size);
+  }
+  .body {
+    margin-top: 0.5rem;
+  }
+
+  .type-note {
+    --background: rgb(var(--color-accent-rgb) / 20%);
+    --color: rgb(var(--color-accent-rgb) / 100%);
+  }
+  .type-warning {
+    --background: rgb(var(--color-warning-rgb) / 20%);
+    --color: rgb(var(--color-warning-rgb) / 100%);
+  }
+</style>

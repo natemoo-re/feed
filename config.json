@@ -1,0 +1,15 @@
+{
+  "handle": "nate",
+  "avatar": "/nate.jpg",
+  "profile": {
+    "name": "Nate Moore",
+    "pronouns": "he / him",
+    "location": "Chicago, IL",
+    "website": "nmoo.dev"
+  },
+  "bio": {
+    "🚀": "Co-creator of [Astro](https://astro.build)",
+    "🪄": "WebAssembly Wizard",
+    "🤏": "JS Minimalist"
+  }
+}

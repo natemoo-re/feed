@@ -1,0 +1,54 @@
+---
+import "@acab/reset.css";
+import "../main.css";
+import Header from "../components/Header.astro";
+import Post from "../components/Post.astro";
+import Profile from "../components/Profile.astro";
+import { getPosts } from "../utils/data";
+
+const posts = await getPosts();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <title>Astro</title>
+  </head>
+  <body>
+    <Profile />
+    <Header />
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <Post {...post} />
+          </li>
+        ))
+      }
+    </ul>
+  </body>
+</html>
+
+<style>
+  ul {
+    margin: 0 auto;
+    max-width: 600px;
+    border: 1px solid var(--color-border);
+    border-top: 0;
+    border-bottom: 0;
+    min-height: 60vh;
+  }
+
+  li + li {
+    border-top: 1px solid var(--color-border);
+  }
+</style>

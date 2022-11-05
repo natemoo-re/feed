@@ -1,0 +1,46 @@
+---
+import { Code } from "astro/components";
+interface Props {
+  code: string;
+  lang: string;
+}
+const { code, lang } = Astro.props;
+---
+
+<div class="code-block">
+  <button aria-label="Copy Code" class="copy">Copy</button>
+  <Code code={code} lang={lang as any} theme="material-darker" />
+</div>
+
+<style>
+  .code-block {
+    z-index: -1;
+    position: relative;
+    margin-top: 0.5rem;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+  :global(.astro-code) {
+    padding: 0.25rem 0.5rem;
+  }
+  .copy {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+</style>
+
+<script>
+  for (const block of document.querySelectorAll(".code-block")) {
+    block.addEventListener("click", async (event) => {
+      if (!(event.target as HTMLElement).closest("button.copy")) return;
+      await navigator.clipboard.writeText(
+        block.querySelector("code")!.textContent!
+      );
+    });
+  }
+</script>

@@ -1,0 +1,30 @@
+---
+import config from "../../../config.json";
+
+interface Props {
+  size?: "small" | "large";
+  border?: boolean;
+}
+
+const { size = "small", border = false } = Astro.props;
+const unit = size === "small" ? 3 : 6;
+---
+
+<img
+  class:list={{ avatar: true, border }}
+  src={config.avatar}
+  width="48"
+  height="48"
+/>
+
+<style define:vars={{ size: `${unit}rem` }}>
+  img {
+    width: var(--size);
+    height: var(--size);
+    border-radius: calc(var(--size) / 2);
+    background: white;
+  }
+  .border {
+    outline: 0.25rem solid black;
+  }
+</style>

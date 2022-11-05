@@ -1,0 +1,24 @@
+html {
+  background: var(--color-background);
+  color-scheme: dark;
+}
+:root {
+  --color-background: rgb(18 18 18);
+  --color-border: rgb(255 255 255 / 15%);
+  --color-muted: rgb(255 255 255 / 67%);
+  --color-accent: #1b99ff;
+  --color-accent-rgb: 27 153 255;
+  --color-warning: #e9503c;
+  --color-warning-rgb: 233 80 60;
+}
+a {
+  color: var(--color-accent);
+}
+code {
+  font-size: 0.9em;
+  font-family: "IBM Plex Mono", monospace;
+}
+.astro-code > code::before,
+.astro-code > code::after {
+  content: none;
+}

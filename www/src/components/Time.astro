@@ -1,0 +1,43 @@
+---
+interface Props {
+  value: Date;
+}
+
+const { value } = Astro.props;
+---
+
+<time datetime={value.toISOString()}>0h</time>
+
+<script>
+  const d = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const now = Date.now();
+  const timeframes: Partial<Record<Intl.RelativeTimeFormatUnit, number>> = {
+    days: 86_400_000,
+    hours: 3_600_000,
+    minutes: 60_000,
+    seconds: 1_000,
+  };
+  const format = (date: Date): string => {
+    const value = date.valueOf();
+    const diff = value - now;
+    for (const [key, val] of Object.entries(timeframes)) {
+      if (Math.abs(diff) > val) {
+        if (key == "days") {
+          return `${d
+            .format(value)
+            .replace(`, ${new Date().getFullYear()}`, "")}`;
+        }
+        return `${Math.abs(Math.floor(diff / val))}${key[0]}`;
+      }
+    }
+    return "just now";
+  };
+  for (const time of document.querySelectorAll("time")) {
+    const value = new Date(time.getAttribute("datetime")!);
+    time.textContent = format(value);
+  }
+</script>

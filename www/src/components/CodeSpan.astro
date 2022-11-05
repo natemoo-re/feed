@@ -1,0 +1,20 @@
+---
+interface Props {
+  code: string;
+}
+const { code } = Astro.props;
+---
+
+<code class="code-span" set:html={code}></code>
+
+<style>
+  .code-span {
+    display: inline-block;
+    padding: 0 0.5em;
+    border-radius: 0.25rem;
+    background: rgb(255 255 255 / 10%);
+  }
+  :global(.astro-code) {
+    padding: 0.25rem 0.5rem;
+  }
+</style>

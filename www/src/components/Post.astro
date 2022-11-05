@@ -1,0 +1,72 @@
+---
+import Time from "./Time.astro";
+import { Markdown } from "astro-remote";
+import Avatar from "./Avatar.astro";
+import config from "../../../config.json";
+import CodeBlock from "./CodeBlock.astro";
+import CodeSpan from "./CodeSpan.astro";
+
+import Note from "./Note.astro";
+import type { Post } from "../utils/data";
+import Separator from "./Separator.astro";
+
+interface Props extends Post {}
+const { content, data, name } = Astro.props;
+---
+
+<article class="post" data-post-id={name} id={name}>
+  <Avatar />
+  <main>
+    <div class="author">
+      <span class="name">{config.profile.name}</span>
+      <span class="details">
+        <span class="username">@{config.handle}</span>
+        <span class="separator"></span>
+        <Time value={data.date} />
+      </span>
+    </div>
+    <div class="body">
+      <Markdown
+        content={content}
+        components={{ CodeBlock, CodeSpan, Note, hr: Separator }}
+      />
+    </div>
+  </main>
+</article>
+
+<style is:global>
+  .post {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  main {
+    padding-bottom: 2em;
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .name {
+    font-weight: bold;
+  }
+
+  .details {
+    color: var(--color-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.33rem;
+    font-size: 0.9rem;
+  }
+
+  .separator {
+    display: inline-block;
+    width: 0.125rem;
+    height: 0.125rem;
+    background: currentColor;
+  }
+</style>
