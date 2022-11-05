@@ -1,6 +1,13 @@
 html {
   background: var(--color-background);
   color-scheme: dark;
+  font-size: 16px;
+  /* @link https://utopia.fyi/type/calculator?c=360,10,1.2,602,18,1.2,0,0,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
+  font-size: clamp(0.63rem, calc(-0.12rem + 3.31vw), 1.13rem);
+}
+body {
+  block-size: 100%;
+  min-block-size: 100dvb;
 }
 :root {
   --color-background: rgb(18 18 18);
@@ -21,4 +28,10 @@ code {
 .astro-code > code::before,
 .astro-code > code::after {
   content: none;
+}
+
+.full:is(.full) {
+  --offset: 3.5rem;
+  margin-left: calc(var(--offset) * -1);
+  max-width: calc(100% + var(--offset));
 }

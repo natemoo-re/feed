@@ -42,10 +42,15 @@ const posts = await getPosts();
   ul {
     margin: 0 auto;
     max-width: 600px;
-    border: 1px solid var(--color-border);
-    border-top: 0;
-    border-bottom: 0;
     min-height: 60vh;
+  }
+
+  @media (min-width: 602px) {
+    ul {
+      border: 1px solid var(--color-border);
+      border-top: 0;
+      border-bottom: 0;
+    }
   }
 
   li + li {

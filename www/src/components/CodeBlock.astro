@@ -1,5 +1,6 @@
 ---
 import { Code } from "astro/components";
+import Copy from "../icons/copy.astro";
 interface Props {
   code: string;
   lang: string;
@@ -7,14 +8,13 @@ interface Props {
 const { code, lang } = Astro.props;
 ---
 
-<div class="code-block">
-  <button aria-label="Copy Code" class="copy">Copy</button>
+<div class="code-block full">
   <Code code={code} lang={lang as any} theme="material-darker" />
+  <button aria-label="Copy Code" class="copy"><span><Copy /></span></button>
 </div>
 
 <style>
   .code-block {
-    z-index: -1;
     position: relative;
     margin-top: 0.5rem;
     max-width: 100%;
@@ -24,13 +24,37 @@ const { code, lang } = Astro.props;
   :global(.astro-code) {
     padding: 0.25rem 0.5rem;
   }
+  .code-block :global(svg) {
+    --size: 1.5rem;
+    width: var(--size);
+    height: var(--size);
+  }
   .copy {
     position: absolute;
+    color: var(--color-muted);
     top: 0;
     right: 0;
     margin: 0.5rem;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
+    padding: 0.25em 0.5rem;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0;
+    box-shadow: 0px 0.3px 2.2px rgb(18 18 18 / 2%),
+      0px 0.8px 5.3px rgb(18 18 18 /28%), 0px 1.5px 10px rgb(18 18 18 /35%),
+      0px 2.7px 17.9px rgb(18 18 18 /42%), 0px 5px 33.4px rgb(18 18 18 / 5%),
+      0px 12px 80px rgb(18 18 18 / 7%);
+    background: linear-gradient(
+      to bottom,
+      rgba(18 18 18 / 80%),
+      rgba(18 18 18 / 100%)
+    );
+    border: 0;
+  }
+  .copy:is(:hover, :focus) {
+    color: white;
+  }
+  .code-block:is(:hover, :focus-within) .copy {
+    opacity: 1;
   }
 </style>
 

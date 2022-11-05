@@ -46,8 +46,13 @@ import { Markdown } from "astro-remote";
   article {
     max-width: 600px;
     margin: 0 auto;
-    border: 1px solid var(--color-border);
-    border-bottom: 0;
+  }
+  @media (min-width: 602px) {
+    article {
+      border: 1px solid var(--color-border);
+      border-top: 0;
+      border-bottom: 0;
+    }
   }
   .hero {
     height: 6rem;
