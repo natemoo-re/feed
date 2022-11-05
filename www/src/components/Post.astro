@@ -5,6 +5,7 @@ import Avatar from "./Avatar.astro";
 import config from "../../../config.json";
 import CodeBlock from "./CodeBlock.astro";
 import CodeSpan from "./CodeSpan.astro";
+import Card from "./Card.astro";
 
 import Note from "./Note.astro";
 import type { Post } from "../utils/data";
@@ -28,7 +29,7 @@ const { content, data, name } = Astro.props;
     <div class="body">
       <Markdown
         content={content}
-        components={{ CodeBlock, CodeSpan, Note, hr: Separator }}
+        components={{ CodeBlock, CodeSpan, Note, hr: Separator, Card }}
       />
     </div>
   </main>

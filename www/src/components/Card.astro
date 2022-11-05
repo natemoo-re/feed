@@ -1,0 +1,77 @@
+---
+import { parse } from "ultrahtml";
+import { querySelectorAll } from "ultrahtml/selector";
+interface Props {
+  href: string;
+}
+const { href } = Astro.props;
+
+const text = await fetch(href).then((res) => res.text());
+const html = await parse(text);
+const og = querySelectorAll(html, 'meta[property^="og:"]').reduce(
+  (acc, meta) => {
+    const { property, content: value } = meta.attributes;
+    const key = property.replace("og:", "");
+    acc[key] = value;
+    return acc;
+  },
+  { "image:width": "1200", "image:height": "630" } as Record<string, string>
+);
+---
+
+<a href={href} class:list={{ card: true, full: true }}>
+  <span class="img">
+    <img
+      src={og.image}
+      alt={og["image:alt"]}
+      width={og["image:width"]}
+      height={og["image:height"]}
+      loading="lazy"
+    />
+  </span>
+  <span class="footer">
+    <span class="href">{new URL(href).origin.replace(/^https?\:\/\//, "")}</span
+    >
+    <span class="site_name">{og.site_name}</span>
+    <span class="description">{og.description}</span>
+  </span>
+</a>
+
+<style>
+  .card {
+    margin-top: 0.5rem;
+    max-width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    color: inherit;
+  }
+  .img {
+    overflow: hidden;
+    aspect-ratio: 1200 / 630;
+    width: 100%;
+    background: red;
+  }
+  .img > img {
+    width: 100%;
+    height: auto;
+  }
+  .footer {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    transition: background 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .site_name {
+    font-weight: 700;
+  }
+  .href,
+  .description {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+  .card:is(:hover, :focus) .footer {
+    background: var(--color-border);
+  }
+</style>

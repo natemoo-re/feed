@@ -8,6 +8,7 @@ specifiers:
   date-fns: ^2.29.3
   fast-glob: ^3.2.12
   gray-matter: ^4.0.3
+  ultrahtml: 1.0.0-next.4
 
 dependencies:
   '@acab/reset.css': 0.5.3
@@ -16,6 +17,7 @@ dependencies:
   date-fns: 2.29.3
   fast-glob: 3.2.12
   gray-matter: 4.0.3
+  ultrahtml: 1.0.0-next.4
 
 devDependencies:
   '@types/node': 18.11.9
@@ -3325,6 +3327,10 @@ packages:
 
   /ultrahtml/0.1.3:
     resolution: {integrity: sha512-P24ulZdT9UKyQuKA1IApdAZ+F9lwruGvmKb4pG3+sMvR3CjN0pjawPnxuSABHQFB+XqnB35TVXzJPOBYjCv6Kw==}
+    dev: false
+
+  /ultrahtml/1.0.0-next.4:
+    resolution: {integrity: sha512-Y6lU3i9asEyzQfUHh5bhWiPDdR+vk+nta0XEouAi7gBKZ6PqUKVMNW693yYYBchDOBv0D22LqNz0puOpeM/7pQ==}
     dev: false
 
   /unherit/3.0.0:
