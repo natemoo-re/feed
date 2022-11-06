@@ -6,7 +6,6 @@ import config from "../../../config.json";
 import CodeBlock from "./CodeBlock.astro";
 import CodeSpan from "./CodeSpan.astro";
 import Card from "./Card.astro";
-import Bounce from "./Bounce.astro";
 import Note from "./Note.astro";
 import type { Post } from "../utils/data";
 import Separator from "./Separator.astro";
@@ -37,7 +36,7 @@ const multi = content.split("---").length > 1;
     <div class="body">
       <Markdown
         content={content}
-        components={{ CodeBlock, CodeSpan, Note, hr: Separator, Card, Bounce }}
+        components={{ CodeBlock, CodeSpan, Note, hr: Separator, Card }}
       />
     </div>
   </main>
