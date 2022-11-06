@@ -6,7 +6,7 @@ import config from "../../../config.json";
 import CodeBlock from "./CodeBlock.astro";
 import CodeSpan from "./CodeSpan.astro";
 import Card from "./Card.astro";
-
+import Bounce from "./Bounce.astro";
 import Note from "./Note.astro";
 import type { Post } from "../utils/data";
 import Separator from "./Separator.astro";
@@ -37,7 +37,7 @@ const multi = content.split("---").length > 1;
     <div class="body">
       <Markdown
         content={content}
-        components={{ CodeBlock, CodeSpan, Note, hr: Separator, Card }}
+        components={{ CodeBlock, CodeSpan, Note, hr: Separator, Card, Bounce }}
       />
     </div>
   </main>
@@ -51,13 +51,14 @@ const multi = content.split("---").length > 1;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
     position: relative;
+    z-index: 0;
   }
   .post-link {
     position: absolute;
     inset: 0;
     outline-offset: -4px;
+    z-index: -1;
   }
-
   .multi::before {
     content: "";
     position: absolute;
@@ -72,7 +73,6 @@ const multi = content.split("---").length > 1;
       rgb(255 255 255 / 0%)
     );
   }
-
   main {
     padding-bottom: 2em;
   }
