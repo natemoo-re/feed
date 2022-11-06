@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@acab/reset.css': ^0.5.3
+  '@astrojs/rss': ^1.0.3
   '@types/node': ^18.11.9
   astro: ^1.6.0
   astro-remote: ^0.2.3
@@ -12,6 +13,7 @@ specifiers:
 
 dependencies:
   '@acab/reset.css': 0.5.3
+  '@astrojs/rss': 1.0.3
   astro: 1.6.3
   astro-remote: 0.2.3
   date-fns: 2.29.3
@@ -112,6 +114,12 @@ packages:
     engines: {node: ^14.18.0 || >=16.12.0}
     dependencies:
       prismjs: 1.29.0
+    dev: false
+
+  /@astrojs/rss/1.0.3:
+    resolution: {integrity: sha512-SkAUMnp/LpryOR5B69rlF69AjKE3YlIPRmWad5WoRVeAH1CEEvSh8sC8/qhtG9haPFYa9JoX6zp5V5MkUOop3A==}
+    dependencies:
+      fast-xml-parser: 4.0.11
     dev: false
 
   /@astrojs/telemetry/1.0.1:
@@ -1567,6 +1575,13 @@ packages:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.5
+    dev: false
+
+  /fast-xml-parser/4.0.11:
+    resolution: {integrity: sha512-4aUg3aNRR/WjQAcpceODG1C3x3lFANXRo8+1biqfieHmg9pyMt7qB4lQV/Ta6sJCTbA5vfD8fnA8S54JATiFUA==}
+    hasBin: true
+    dependencies:
+      strnum: 1.0.5
     dev: false
 
   /fastq/1.13.0:
@@ -3207,6 +3222,10 @@ packages:
   /strip-final-newline/3.0.0:
     resolution: {integrity: sha512-dOESqjYr96iWYylGObzd39EuNTa5VJxyvVAEm5Jnh7KGo75V43Hk1odPQkNDyXNmUR6k+gEiDVXnjB8HJ3crXw==}
     engines: {node: '>=12'}
+    dev: false
+
+  /strnum/1.0.5:
+    resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
     dev: false
 
   /style-to-object/0.3.0:

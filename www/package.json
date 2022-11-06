@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@acab/reset.css": "^0.5.3",
+    "@astrojs/rss": "^1.0.3",
     "astro": "^1.6.0",
     "astro-remote": "^0.2.3",
     "date-fns": "^2.29.3",

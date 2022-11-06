@@ -10,9 +10,13 @@ const { code } = Astro.props;
 <style>
   .code-span {
     display: inline-block;
-    padding: 0 0.5em;
+    padding: 0 0.1em;
     border-radius: 0.25rem;
     background: rgb(255 255 255 / 10%);
+  }
+  .code-span::before,
+  .code-span::after {
+    content: "`";
   }
   :global(.astro-code) {
     padding: 0.25rem 0.5rem;

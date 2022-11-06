@@ -1,0 +1,63 @@
+---
+import "@acab/reset.css";
+import "../../main.css";
+import Header from "../../components/Header.astro";
+import Post from "../../components/Post.astro";
+import Profile from "../../components/Profile.astro";
+import { getPosts } from "../../utils/data";
+
+export async function getStaticPaths() {
+  return getPosts().then((posts) =>
+    posts.map((post) => ({
+      params: { id: post.name },
+      props: { post },
+    }))
+  );
+}
+
+const { post } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <title>{post.data.title}</title>
+  </head>
+  <body>
+    <Header back="/">{post.data.title}</Header>
+    <ul>
+      <li>
+        <Post {...post} />
+      </li>
+    </ul>
+    <style>
+      ul {
+        margin: 0 auto;
+        max-width: 600px;
+        min-height: calc(100vh - 3.5rem);
+        margin-top: 3.5rem;
+      }
+
+      @media (min-width: 602px) {
+        ul {
+          border: 1px solid var(--color-border);
+          border-top: 0;
+          border-bottom: 0;
+        }
+      }
+
+      li + li {
+        border-top: 1px solid var(--color-border);
+      }
+    </style>
+  </body>
+</html>

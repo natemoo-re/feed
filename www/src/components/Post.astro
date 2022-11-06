@@ -18,6 +18,7 @@ const multi = content.split("---").length > 1;
 ---
 
 <article class:list={{ post: true, multi }} data-post-id={name} id={name}>
+  <a class="post-link" href={`/p/${name}`}></a>
   <Avatar />
   <main>
     <div class="author">
@@ -45,6 +46,10 @@ const multi = content.split("---").length > 1;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
     position: relative;
+  }
+  .post-link {
+    position: absolute;
+    inset: 0;
   }
 
   .multi::before {

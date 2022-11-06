@@ -5,15 +5,23 @@ import Link from "../icons/link.astro";
 import User from "../icons/user.astro";
 import Location from "../icons/location.astro";
 import { Markdown } from "astro-remote";
+import RSS from "../icons/rss.astro";
 ---
 
 <article>
   <div class="hero"></div>
   <Avatar size="large" border />
   <main>
-    <div>
-      <h1>{config.profile.name}</h1>
-      <h2>@{config.handle}</h2>
+    <div class="title">
+      <div class="hgroup">
+        <h1>{config.profile.name}</h1>
+        <h2>@{config.handle}</h2>
+      </div>
+      <div>
+        <a class="subscribe" href="/rss.xml">
+          <span><RSS /></span>
+        </a>
+      </div>
     </div>
     <div>
       <ul>
@@ -60,6 +68,27 @@ import { Markdown } from "astro-remote";
     margin: -1rem;
     margin-bottom: -3rem;
   }
+  .title {
+    display: flex;
+    justify-content: space-between;
+  }
+  .subscribe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    background: white;
+    color: black;
+    --size: 2rem;
+    width: var(--size);
+    height: var(--size);
+  }
+  .subscribe :global(svg) {
+    --size: 1.5rem;
+    width: var(--size);
+    height: var(--size);
+    margin-left: 0.125rem;
+  }
   article {
     padding: 1rem;
     padding-bottom: 0;
@@ -72,6 +101,10 @@ import { Markdown } from "astro-remote";
     flex-direction: column;
     gap: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+  .hgroup {
+    display: flex;
+    flex-direction: column;
   }
   h1 {
     font-size: 1.25rem;
