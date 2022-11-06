@@ -7,7 +7,7 @@ html {
 body {
   block-size: 100%;
   min-block-size: 100dvb;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 :root {
   --color-background: rgb(18 18 18);
