@@ -1,6 +1,7 @@
 ---
 import { parse } from "ultrahtml";
 import { querySelectorAll } from "ultrahtml/selector";
+import { dset } from "dset";
 interface Props {
   href: string;
 }
@@ -12,23 +13,24 @@ const og = querySelectorAll(html, 'meta[property^="og:"]').reduce(
   (acc, meta) => {
     const { property, content: value } = meta.attributes;
     const key = property.replace("og:", "");
-    acc[key] = value;
+    dset(acc, key === "image" ? "image.src" : key.replace(/\:/g, "."), value);
     return acc;
   },
-  { "image:width": "1200", "image:height": "630" } as Record<string, string>
+  {} as Record<string, any>
 );
+const {
+  image: { src, width = "1200", height = "630", alt },
+} = og;
 ---
 
 <a href={href} class:list={{ card: true }}>
-  <span class="img">
-    <img
-      src={og.image}
-      alt={og["image:alt"]}
-      width={og["image:width"]}
-      height={og["image:height"]}
-      loading="lazy"
-    />
-  </span>
+  {
+    og.image && (
+      <span class="img">
+        <img {...{ src, width, height, alt }} loading="lazy" />
+      </span>
+    )
+  }
   <span class="footer">
     <span class="href">{new URL(href).origin.replace(/^https?\:\/\//, "")}</span
     >

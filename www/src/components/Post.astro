@@ -10,15 +10,20 @@ import Card from "./Card.astro";
 import Note from "./Note.astro";
 import type { Post } from "../utils/data";
 import Separator from "./Separator.astro";
+import { isSinglePost } from "../utils/request";
 
 interface Props extends Post {}
 const { content, data, name } = Astro.props;
 
+let useLink = true;
+if (isSinglePost(Astro.request)) {
+  useLink = false;
+}
 const multi = content.split("---").length > 1;
 ---
 
 <article class:list={{ post: true, multi }} data-post-id={name} id={name}>
-  <a class="post-link" href={`/p/${name}`}></a>
+  {useLink && <a class="post-link" href={`/p/${name}`} />}
   <Avatar />
   <main>
     <div class="author">
@@ -50,6 +55,7 @@ const multi = content.split("---").length > 1;
   .post-link {
     position: absolute;
     inset: 0;
+    outline-offset: -4px;
   }
 
   .multi::before {

@@ -35,14 +35,23 @@ const { back } = Astro.props;
   }
   a {
     color: var(--color-muted);
+    padding: 0.125rem;
+    --size: 2rem;
+    width: var(--size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   a:is(:hover, :focus) {
     color: white;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 2%);
   }
   a :global(svg) {
-    --size: 2rem;
+    --size: 1.75rem;
     width: var(--size);
     height: var(--size);
+    margin-left: 0.125rem;
   }
   header {
     z-index: 1;
