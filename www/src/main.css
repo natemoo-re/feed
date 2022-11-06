@@ -29,8 +29,3 @@ code {
 .astro-code > code::after {
   content: none;
 }
-.full:is(.full) {
-  --offset: 3.5rem;
-  margin-left: calc(var(--offset) * -1);
-  max-width: calc(100% + var(--offset));
-}

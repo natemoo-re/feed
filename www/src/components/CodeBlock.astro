@@ -8,7 +8,7 @@ interface Props {
 const { code, lang } = Astro.props;
 ---
 
-<div class="code-block full">
+<div class="code-block">
   <Code code={code} lang={lang as any} theme="material-darker" />
   <button aria-label="Copy Code" class="copy"><span><Copy /></span></button>
 </div>

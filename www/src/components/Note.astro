@@ -8,7 +8,7 @@ interface Props {
 const { type } = Astro.props;
 ---
 
-<div class:list={{ note: true, full: true, [`type-${type}`]: true }}>
+<div class:list={{ note: true, [`type-${type}`]: true }}>
   {
     type === "note" && (
       <span class="label">
