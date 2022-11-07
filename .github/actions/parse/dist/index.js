@@ -1,3 +1,4 @@
+"use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1935,7 +1936,7 @@ var require_path_utils = __commonJS({
     };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = void 0;
-    var path = __importStar(require("path"));
+    var path2 = __importStar(require("path"));
     function toPosixPath(pth) {
       return pth.replace(/[\\]/g, "/");
     }
@@ -1945,7 +1946,7 @@ var require_path_utils = __commonJS({
     }
     exports.toWin32Path = toWin32Path;
     function toPlatformPath(pth) {
-      return pth.replace(/[/\\]/g, path.sep);
+      return pth.replace(/[/\\]/g, path2.sep);
     }
     exports.toPlatformPath = toPlatformPath;
   }
@@ -2016,7 +2017,7 @@ var require_core = __commonJS({
     var file_command_1 = require_file_command();
     var utils_1 = require_utils();
     var os = __importStar(require("os"));
-    var path = __importStar(require("path"));
+    var path2 = __importStar(require("path"));
     var oidc_utils_1 = require_oidc_utils();
     var ExitCode;
     (function(ExitCode2) {
@@ -2044,7 +2045,7 @@ var require_core = __commonJS({
       } else {
         command_1.issueCommand("add-path", {}, inputPath);
       }
-      process.env["PATH"] = `${inputPath}${path.delimiter}${process.env["PATH"]}`;
+      process.env["PATH"] = `${inputPath}${path2.delimiter}${process.env["PATH"]}`;
     }
     exports.addPath = addPath;
     function getInput2(name, options) {
@@ -2182,14 +2183,17 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
 
 // src/index.ts
 var import_core = __toESM(require_core());
-var fs = __toESM(require("node:fs"));
+var import_node_fs = __toESM(require("node:fs"));
+var import_node_path = __toESM(require("node:path"));
 async function run() {
   const files = (0, import_core.getInput)("files");
   for (const file of files.split(" ")) {
     if (!file.endsWith(".md"))
       return;
-    const contents = fs.readFileSync(file, { encoding: "utf-8" });
-    console.log({ file, contents });
+    const contents = import_node_fs.default.readFileSync(file, { encoding: "utf-8" });
+    const id = import_node_path.default.basename(file).replace(".md", "");
+    const post = contents.split("---").slice(1);
+    console.log({ id, post });
   }
 }
 run();
