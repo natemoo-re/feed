@@ -8,7 +8,7 @@ export const get = () => rss({
   description: 'Short-form thoughts from Nate',
   site: import.meta.env.SITE,
   items: posts.map(post => ({
-    link: new URL(`/p/${post.name}`, import.meta.env.SITE).toString(),
+    link: new URL(`/p/${post.id}`, import.meta.env.SITE).toString(),
     title: post.id,
     pubDate: post.data.date,
   })),
