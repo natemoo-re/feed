@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "esbuild src/index.ts --bundle --outfile=dist/index.mjs --platform=node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.10.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.13"
   }
 }
