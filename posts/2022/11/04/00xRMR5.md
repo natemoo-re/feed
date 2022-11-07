@@ -1,6 +1,5 @@
 ---
-title: Hello world!
-date: 2022-11-04T21:25:06.892Z
+date: 2022-11-04T21:25:06Z
 ---
 
 Twitter's going up in flames. Mastodon seems lame. Blogging is a lot of pressure.

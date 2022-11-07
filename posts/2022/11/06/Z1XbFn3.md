@@ -1,6 +1,5 @@
 ---
-title: Platform!
-date: 2022-11-06T21:12:07.349Z
+date: 2022-11-06T21:12:07Z
 ---
 
 Okay, I'm actually really enjoying tweaking the UI on this feed.

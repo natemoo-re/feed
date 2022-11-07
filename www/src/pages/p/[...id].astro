@@ -10,7 +10,7 @@ import { setSinglePost } from "../../utils/request";
 export async function getStaticPaths() {
   return getPosts().then((posts) =>
     posts.map((post) => ({
-      params: { id: post.name },
+      params: { id: post.id },
       props: { post },
     }))
   );
@@ -32,10 +32,10 @@ const { post } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
       rel="stylesheet"
     />
-    <title>{post.data.title}</title>
+    <title>Post | Nate's Feed</title>
   </head>
   <body>
-    <Header back="/">{post.data.title}</Header>
+    <Header back="/">Nate's Feed</Header>
     <ul>
       <li>
         <Post {...post} />

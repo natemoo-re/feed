@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 
 export interface Post {
+  id: string;
   name: string;
   data: { title: string, date: Date, draft?: boolean }
   content: string;
@@ -11,13 +12,16 @@ export interface Post {
 
 async function read(dir: URL): Promise<Post[]> {
   const base = fileURLToPath(dir);
-  const entries = await glob(base + "**", { absolute: true, followSymbolicLinks: true });
+  const entries = await glob(base + "**", { absolute: true });
   return await Promise.all(
     entries.map((file) =>
       fs.readFile(file, { encoding: "utf-8" }).then((doc) => {
         const { content, data } = matter(doc)
+        const name = file.replace(base, "").replace(/\.mdx?$/, "");
+        const id = name.split('/').pop();
         return {
-          name: file.replace(base, "").replace(/\.mdx?$/, ""),
+          id,
+          name,
           data,
           content,
         };

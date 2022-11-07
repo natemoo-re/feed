@@ -12,7 +12,7 @@ import Separator from "./Separator.astro";
 import { isSinglePost } from "../utils/request";
 
 interface Props extends Post {}
-const { content, data, name } = Astro.props;
+const { content, data, name, id } = Astro.props;
 
 let useLink = true;
 if (isSinglePost(Astro.request)) {
@@ -21,8 +21,8 @@ if (isSinglePost(Astro.request)) {
 const multi = content.split("---").length > 1;
 ---
 
-<article class:list={{ post: true, multi }} data-post-id={name} id={name}>
-  {useLink && <a class="post-link" href={`/p/${name}`} />}
+<article class:list={{ post: true, multi }} data-post-id={id} id={id}>
+  {useLink && <a class="post-link" href={`/p/${id}`} />}
   <Avatar />
   <main>
     <div class="author">

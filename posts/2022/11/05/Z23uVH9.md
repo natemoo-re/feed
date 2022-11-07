@@ -1,6 +1,5 @@
 ---
-title: Platform?
-date: 2022-11-05T03:17:34.251Z
+date: 2022-11-05T03:17:34Z
 ---
 
 I couldn't possibly take on another project, but it would be so cool if someone turned this idea into a platform.
