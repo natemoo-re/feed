@@ -36,7 +36,7 @@ const { post } = Astro.props;
   </head>
   <body>
     <Header back="/">Nate's Feed</Header>
-    <ul>
+    <ul class="container">
       <li>
         <Post {...post} />
       </li>
@@ -44,17 +44,8 @@ const { post } = Astro.props;
     <style>
       ul {
         margin: 0 auto;
-        max-width: 600px;
         min-height: calc(100vh - 3.5rem);
         margin-top: 3.5rem;
-      }
-
-      @media (min-width: 602px) {
-        ul {
-          border: 1px solid var(--color-border);
-          border-top: 0;
-          border-bottom: 0;
-        }
       }
 
       li + li {

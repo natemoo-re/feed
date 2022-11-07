@@ -8,7 +8,7 @@ import { Markdown } from "astro-remote";
 import RSS from "../icons/rss.astro";
 ---
 
-<article>
+<article class="container">
   <div class="hero"></div>
   <Avatar size="large" border />
   <main>
@@ -52,15 +52,7 @@ import RSS from "../icons/rss.astro";
 
 <style>
   article {
-    max-width: 600px;
     margin: 0 auto;
-  }
-  @media (min-width: 602px) {
-    article {
-      border: 1px solid var(--color-border);
-      border-top: 0;
-      border-bottom: 0;
-    }
   }
   .hero {
     height: 6rem;
