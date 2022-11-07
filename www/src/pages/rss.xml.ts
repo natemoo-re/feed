@@ -10,6 +10,7 @@ export const get = () => rss({
   items: posts.map(post => ({
     link: new URL(`/p/${post.id}`, import.meta.env.SITE).toString(),
     title: post.id,
+    description: post.content.split('---').at(0),
     pubDate: post.data.date,
   })),
 });
