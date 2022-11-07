@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@actions/core": "^1.10.0"
+    "@actions/core": "^1.10.0",
+    "remark": "^14.0.2",
+    "strip-markdown": "^5.0.0"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
