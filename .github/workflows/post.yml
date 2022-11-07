@@ -14,6 +14,13 @@ jobs:
       - id: files
         uses: jitterbit/get-changed-files@v1
       - uses: ./.github/actions/parse
+        id: parse
         with:
           files: ${{ steps.files.outputs.added }}
-      # - uses: ethomson/send-tweet-action@v1
+      - uses: ethomson/send-tweet-action@v1
+        with:
+          status: ${{ steps.parse.outputs.body }}
+          consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
+          consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
+          access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}

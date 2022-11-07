@@ -4,6 +4,9 @@ inputs:
   files:
     description: "Files"
     required: true
+outputs:
+  body:
+    description: "The body of the tweet"
 runs:
   using: node16
   main: "./dist/index.js"

@@ -2083,7 +2083,7 @@ var require_core = __commonJS({
 Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
     }
     exports.getBooleanInput = getBooleanInput;
-    function setOutput(name, value) {
+    function setOutput2(name, value) {
       const filePath = process.env["GITHUB_OUTPUT"] || "";
       if (filePath) {
         return file_command_1.issueFileCommand("OUTPUT", file_command_1.prepareKeyValueMessage(name, value));
@@ -2091,7 +2091,7 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
       process.stdout.write(os.EOL);
       command_1.issueCommand("set-output", { name }, utils_1.toCommandValue(value));
     }
-    exports.setOutput = setOutput;
+    exports.setOutput = setOutput2;
     function setCommandEcho(enabled) {
       command_1.issue("echo", enabled ? "on" : "off");
     }
@@ -11230,7 +11230,7 @@ function empty() {
 // src/index.ts
 var import_truncate = __toESM(require_truncate());
 var formatTweet = async (markdown, url) => {
-  return remark().use(stripMarkdown).process(markdown).then((file) => (0, import_truncate.default)(String(file), 260) + "\n\n" + url);
+  return remark().use(stripMarkdown).process(markdown).then((file) => (0, import_truncate.default)(String(file).trim(), 260) + "\n\n" + url);
 };
 async function run() {
   const files = (0, import_core.getInput)("files");
@@ -11242,7 +11242,7 @@ async function run() {
     const [markdown] = contents.split("---").slice(2);
     const url = `feed.nmoo.dev/p/${id}`;
     const body = await formatTweet(markdown, url);
-    console.log({ body });
+    return (0, import_core.setOutput)("body", body);
   }
 }
 run();
