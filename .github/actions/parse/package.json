@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=dist/index.mjs --platform=node"
+    "build": "esbuild src/index.ts --bundle --outfile=dist/index.mjs --format=esm --platform=node"
   },
   "keywords": [],
   "author": "",

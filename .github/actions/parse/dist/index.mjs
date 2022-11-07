@@ -4,7 +4,14 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __commonJS = (cb, mod) => function __require() {
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined")
+    return require.apply(this, arguments);
+  throw new Error('Dynamic require of "' + x + '" is not supported');
+});
+var __commonJS = (cb, mod) => function __require2() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __copyProps = (to, from, except, desc) => {
@@ -86,7 +93,7 @@ var require_command = __commonJS({
     };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.issue = exports.issueCommand = void 0;
-    var os = __importStar(require("os"));
+    var os = __importStar(__require("os"));
     var utils_1 = require_utils();
     function issueCommand(command, properties, message) {
       const cmd = new Command(command, properties, message);
@@ -147,7 +154,7 @@ var require_rng = __commonJS({
       value: true
     });
     exports.default = rng;
-    var _crypto = _interopRequireDefault(require("crypto"));
+    var _crypto = _interopRequireDefault(__require("crypto"));
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : { default: obj };
     }
@@ -406,7 +413,7 @@ var require_md5 = __commonJS({
       value: true
     });
     exports.default = void 0;
-    var _crypto = _interopRequireDefault(require("crypto"));
+    var _crypto = _interopRequireDefault(__require("crypto"));
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : { default: obj };
     }
@@ -482,7 +489,7 @@ var require_sha1 = __commonJS({
       value: true
     });
     exports.default = void 0;
-    var _crypto = _interopRequireDefault(require("crypto"));
+    var _crypto = _interopRequireDefault(__require("crypto"));
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : { default: obj };
     }
@@ -664,8 +671,8 @@ var require_file_command = __commonJS({
     };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
-    var fs = __importStar(require("fs"));
-    var os = __importStar(require("os"));
+    var fs = __importStar(__require("fs"));
+    var os = __importStar(__require("os"));
     var uuid_1 = require_dist();
     var utils_1 = require_utils();
     function issueFileCommand(command, message) {
@@ -756,13 +763,13 @@ var require_proxy = __commonJS({
 var require_tunnel = __commonJS({
   "node_modules/tunnel/lib/tunnel.js"(exports) {
     "use strict";
-    var net = require("net");
-    var tls = require("tls");
-    var http = require("http");
-    var https = require("https");
-    var events = require("events");
-    var assert = require("assert");
-    var util = require("util");
+    var net = __require("net");
+    var tls = __require("tls");
+    var http = __require("http");
+    var https = __require("https");
+    var events = __require("events");
+    var assert = __require("assert");
+    var util = __require("util");
     exports.httpOverHttp = httpOverHttp;
     exports.httpsOverHttp = httpsOverHttp;
     exports.httpOverHttps = httpOverHttps;
@@ -984,8 +991,8 @@ var require_tunnel = __commonJS({
 
 // node_modules/tunnel/index.js
 var require_tunnel2 = __commonJS({
-  "node_modules/tunnel/index.js"(exports, module2) {
-    module2.exports = require_tunnel();
+  "node_modules/tunnel/index.js"(exports, module) {
+    module.exports = require_tunnel();
   }
 });
 
@@ -1050,8 +1057,8 @@ var require_lib = __commonJS({
     };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
-    var http = __importStar(require("http"));
-    var https = __importStar(require("https"));
+    var http = __importStar(__require("http"));
+    var https = __importStar(__require("https"));
     var pm = __importStar(require_proxy());
     var tunnel = __importStar(require_tunnel2());
     var HttpCodes;
@@ -1769,8 +1776,8 @@ var require_summary = __commonJS({
     };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
-    var os_1 = require("os");
-    var fs_1 = require("fs");
+    var os_1 = __require("os");
+    var fs_1 = __require("fs");
     var { access, appendFile, writeFile } = fs_1.promises;
     exports.SUMMARY_ENV_VAR = "GITHUB_STEP_SUMMARY";
     exports.SUMMARY_DOCS_URL = "https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary";
@@ -1935,7 +1942,7 @@ var require_path_utils = __commonJS({
     };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = void 0;
-    var path = __importStar(require("path"));
+    var path = __importStar(__require("path"));
     function toPosixPath(pth) {
       return pth.replace(/[\\]/g, "/");
     }
@@ -2015,8 +2022,8 @@ var require_core = __commonJS({
     var command_1 = require_command();
     var file_command_1 = require_file_command();
     var utils_1 = require_utils();
-    var os = __importStar(require("os"));
-    var path = __importStar(require("path"));
+    var os = __importStar(__require("os"));
+    var path = __importStar(__require("path"));
     var oidc_utils_1 = require_oidc_utils();
     var ExitCode;
     (function(ExitCode2) {
