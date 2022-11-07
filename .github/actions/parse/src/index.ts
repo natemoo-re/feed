@@ -3,13 +3,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { remark } from 'remark'
 import strip from 'strip-markdown';
+import truncate from 'truncate';
 
-const formatTweet = async (markdown: string) => {
-  const body = await remark()
+const formatTweet = async (markdown: string, url: string) => {
+  return remark()
     .use(strip)
     .process(markdown)
-    .then((file) => String(file))
-  console.log(body);
+    .then((file) => truncate(String(file), 260) + '\n\n' + url)
 }
 
 async function run() {
@@ -21,8 +21,8 @@ async function run() {
         const [markdown] = contents.split('---').slice(2);
 
         const url = `feed.nmoo.dev/p/${id}`;
-        const body = await formatTweet(markdown);
-        console.log({ url, body });
+        const body = await formatTweet(markdown, url);
+        console.log({ body });
     }
 }
 

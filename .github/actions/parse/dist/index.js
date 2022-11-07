@@ -2285,6 +2285,53 @@ var require_extend = __commonJS({
   }
 });
 
+// node_modules/truncate/truncate.js
+var require_truncate = __commonJS({
+  "node_modules/truncate/truncate.js"(exports, module2) {
+    (function(context, undefined2) {
+      "use strict";
+      var DEFAULT_TRUNCATE_SYMBOL = "\u2026", URL_REGEX = /(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)|((mailto:)?[_.\w-]{1,300}@(.{1,300}\.)[a-zA-Z]{2,3})/g;
+      function __appendEllipsis(string3, options, content3) {
+        if (content3.length === string3.length || !options.ellipsis) {
+          return content3;
+        }
+        content3 += options.ellipsis;
+        return content3;
+      }
+      function truncate2(string3, maxLength, options) {
+        var content3 = "", matches = true, remainingLength = maxLength, result, index2;
+        options = options || {};
+        options.ellipsis = typeof options.ellipsis === "undefined" ? DEFAULT_TRUNCATE_SYMBOL : options.ellipsis;
+        if (!string3 || string3.length === 0) {
+          return "";
+        }
+        matches = true;
+        while (matches) {
+          URL_REGEX.lastIndex = content3.length;
+          matches = URL_REGEX.exec(string3);
+          if (!matches || matches.index - content3.length >= remainingLength || URL_REGEX.lastIndex >= maxLength + 3e3) {
+            content3 += string3.substring(content3.length, maxLength);
+            return __appendEllipsis(string3, options, content3, maxLength);
+          }
+          result = matches[0];
+          index2 = matches.index;
+          content3 += string3.substring(content3.length, index2 + result.length);
+          remainingLength -= index2 + result.length;
+          if (remainingLength <= 0) {
+            break;
+          }
+        }
+        return __appendEllipsis(string3, options, content3, maxLength);
+      }
+      if ("undefined" !== typeof module2 && module2.exports) {
+        module2.exports = truncate2;
+      } else {
+        context.truncate = truncate2;
+      }
+    })(String);
+  }
+});
+
 // src/index.ts
 var import_core = __toESM(require_core());
 var import_node_fs = __toESM(require("node:fs"));
@@ -11181,9 +11228,9 @@ function empty() {
 }
 
 // src/index.ts
-var formatTweet = async (markdown) => {
-  const body = await remark().use(stripMarkdown).process(markdown).then((file) => String(file));
-  console.log(body);
+var import_truncate = __toESM(require_truncate());
+var formatTweet = async (markdown, url) => {
+  return remark().use(stripMarkdown).process(markdown).then((file) => (0, import_truncate.default)(String(file), 260) + "\n\n" + url);
 };
 async function run() {
   const files = (0, import_core.getInput)("files");
@@ -11194,8 +11241,8 @@ async function run() {
     const id = import_node_path.default.basename(file).replace(".md", "");
     const [markdown] = contents.split("---").slice(2);
     const url = `feed.nmoo.dev/p/${id}`;
-    const body = await formatTweet(markdown);
-    console.log({ url, body });
+    const body = await formatTweet(markdown, url);
+    console.log({ body });
   }
 }
 run();
