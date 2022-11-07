@@ -1,0 +1,9 @@
+name: "Parse"
+description: "Parse tweet"
+inputs:
+  files:
+    description: "Files"
+    required: true
+runs:
+  using: node16
+  main: "/index.mjs"
