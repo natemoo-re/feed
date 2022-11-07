@@ -4,6 +4,7 @@ on:
     branches:
       - "main"
     paths:
+      - ".github/**"
       - "posts/**/*.md"
 jobs:
   tweet:
