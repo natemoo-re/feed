@@ -18,6 +18,7 @@ jobs:
         with:
           files: ${{ steps.files.outputs.added }}
       - uses: ethomson/send-tweet-action@v1
+        if: ${{ steps.parse.outputs.body != "" }}
         with:
           status: ${{ steps.parse.outputs.body }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
