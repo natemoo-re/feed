@@ -11182,7 +11182,7 @@ function empty() {
 
 // src/index.ts
 var formatTweet = async (markdown) => {
-  const body = remark().use(stripMarkdown).process(markdown).then((file) => String(file));
+  const body = await remark().use(stripMarkdown).process(markdown).then((file) => String(file));
   console.log(body);
 };
 async function run() {

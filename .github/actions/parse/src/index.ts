@@ -5,7 +5,7 @@ import { remark } from 'remark'
 import strip from 'strip-markdown';
 
 const formatTweet = async (markdown: string) => {
-  const body = remark()
+  const body = await remark()
     .use(strip)
     .process(markdown)
     .then((file) => String(file))
