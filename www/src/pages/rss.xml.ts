@@ -9,7 +9,7 @@ export const get = () => rss({
   site: import.meta.env.SITE,
   items: posts.map(post => ({
     link: new URL(`/p/${post.name}`, import.meta.env.SITE).toString(),
-    title: post.data.title,
+    title: post.id,
     pubDate: post.data.date,
   })),
 });
