@@ -40,10 +40,10 @@ import RSS from "../icons/rss.astro";
     <ul>
       <li><User />{config.profile.pronouns}</li>
       <li><Location />{config.profile.location}</li>
-      <li>
-        <Link /><a
+      <li class="link">
+        <a
           href={`https://${config.profile.website.replace(/https?\:\/\//, "")}`}
-          >{config.profile.website}</a
+          ><span><Link /></span>{config.profile.website}</a
         >
       </li>
     </ul>
@@ -120,7 +120,6 @@ import RSS from "../icons/rss.astro";
   footer {
     margin-left: -1rem;
     margin-right: -1rem;
-    padding: 1rem;
     border-top: 1px solid var(--color-border);
     color: var(--color-muted);
     background: linear-gradient(
@@ -130,17 +129,42 @@ import RSS from "../icons/rss.astro";
       rgb(18 18 18 / 0%)
     );
     z-index: 2;
+    height: 100%;
   }
   footer > ul {
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 1fr);
+    padding: 0 1rem;
   }
   footer li {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  .link {
+    display: flex;
+    justify-content: center;
+    margin-right: -1rem;
+    padding-right: 1rem;
+    width: calc(100% + 1rem);
+    height: 100%;
+    position: relative;
+  }
+  .link a {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: inherit;
+  }
+  .link a:is(:hover, :focus) {
+    color: white;
+    background: rgb(255 255 255 / 2%);
   }
   footer :global(svg) {
     --size: 1.25rem;
