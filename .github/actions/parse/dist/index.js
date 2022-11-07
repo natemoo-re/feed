@@ -664,7 +664,7 @@ var require_file_command = __commonJS({
     };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
-    var fs = __importStar(require("fs"));
+    var fs2 = __importStar(require("fs"));
     var os = __importStar(require("os"));
     var uuid_1 = require_dist();
     var utils_1 = require_utils();
@@ -673,10 +673,10 @@ var require_file_command = __commonJS({
       if (!filePath) {
         throw new Error(`Unable to find environment variable for file command ${command}`);
       }
-      if (!fs.existsSync(filePath)) {
+      if (!fs2.existsSync(filePath)) {
         throw new Error(`Missing file at path: ${filePath}`);
       }
-      fs.appendFileSync(filePath, `${utils_1.toCommandValue(message)}${os.EOL}`, {
+      fs2.appendFileSync(filePath, `${utils_1.toCommandValue(message)}${os.EOL}`, {
         encoding: "utf8"
       });
     }
@@ -2182,10 +2182,14 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
 
 // src/index.ts
 var import_core = __toESM(require_core());
+var fs = __toESM(require("node:fs"));
 async function run() {
   const files = (0, import_core.getInput)("files");
   for (const file of files.split(" ")) {
-    console.log({ file });
+    if (!file.endsWith(".md"))
+      return;
+    const contents = fs.readFileSync(file, { encoding: "utf-8" });
+    console.log({ file, contents });
   }
 }
 run();
