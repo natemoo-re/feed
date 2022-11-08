@@ -1,9 +1,7 @@
 ---
-import "@acab/reset.css";
-import "../../main.css";
+import Layout from "../../layouts/index.astro";
 import Header from "../../components/Header.astro";
 import Post from "../../components/Post.astro";
-import Profile from "../../components/Profile.astro";
 import { getPosts } from "../../utils/data";
 import { setSinglePost } from "../../utils/request";
 
@@ -20,37 +18,27 @@ setSinglePost(Astro.request);
 const { post } = Astro.props;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
-      rel="stylesheet"
-    />
+<Layout>
+  <Fragment slot="head">
     <title>Post | Nate's Feed</title>
-  </head>
-  <body>
-    <Header back="/">Nate's Feed</Header>
-    <ul class="container">
-      <li>
-        <Post {...post} />
-      </li>
-    </ul>
-    <style>
-      ul {
-        margin: 0 auto;
-        min-height: calc(100vh - 3.5rem);
-        margin-top: 3.5rem;
-      }
+  </Fragment>
+  <Header back="/">Nate's Feed</Header>
 
-      li + li {
-        border-top: 1px solid var(--color-border);
-      }
-    </style>
-  </body>
-</html>
+  <ul class="container">
+    <li>
+      <Post {...post} />
+    </li>
+  </ul>
+</Layout>
+
+<style>
+  ul {
+    margin: 0 auto;
+    min-height: calc(100vh - 3.5rem);
+    margin-top: 3.5rem;
+  }
+
+  li + li {
+    border-top: 1px solid var(--color-border);
+  }
+</style>

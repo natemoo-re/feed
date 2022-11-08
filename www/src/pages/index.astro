@@ -1,6 +1,5 @@
 ---
-import "@acab/reset.css";
-import "../main.css";
+import Layout from "../layouts/index.astro";
 import Header from "../components/Header.astro";
 import Post from "../components/Post.astro";
 import Profile from "../components/Profile.astro";
@@ -9,34 +8,23 @@ import { getPosts } from "../utils/data";
 const posts = await getPosts();
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
-      rel="stylesheet"
-    />
+<Layout>
+  <Fragment slot="head">
     <title>Nate's Feed</title>
-  </head>
-  <body>
-    <Profile />
-    <Header>Nate's Feed</Header>
-    <ul class="container">
-      {
-        posts.map((post) => (
-          <li>
-            <Post {...post} />
-          </li>
-        ))
-      }
-    </ul>
-  </body>
-</html>
+  </Fragment>
+
+  <Profile />
+  <Header>Nate's Feed</Header>
+  <ul class="container">
+    {
+      posts.map((post) => (
+        <li>
+          <Post {...post} />
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
 
 <style>
   ul {
