@@ -5,11 +5,22 @@ import { remark } from 'remark'
 import strip from 'strip-markdown';
 import truncate from 'truncate';
 
-const formatTweet = async (markdown: string, url: string) => {
+const formatTweet = async (content: string, url: string) => {
+  const [markdown, ...more] = content.split('---').slice(2);
   return remark()
     .use(strip)
     .process(markdown)
-    .then((file) => truncate(String(file).trim(), 260) + '\n\n' + url)
+    .then((file) => {
+        const str = String(file).trim();
+        if (str.length < 260) {
+            if (more.length === 0) {
+                return str;
+            } else {
+                return str + '\n\n' + url;
+            }
+        }
+        return truncate(str, 260) + '\n\n' + url;
+    })
 }
 
 async function run() {
@@ -19,10 +30,9 @@ async function run() {
 
         const contents = fs.readFileSync(file, { encoding: 'utf-8' });
         const id = path.basename(file).replace('.md', '');
-        const [markdown] = contents.split('---').slice(2);
 
         const url = `feed.nmoo.dev/p/${id}`;
-        const body = await formatTweet(markdown, url);
+        const body = await formatTweet(contents, url);
         return setOutput('body', body);
     }
 }

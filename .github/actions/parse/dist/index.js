@@ -11229,8 +11229,19 @@ function empty() {
 
 // src/index.ts
 var import_truncate = __toESM(require_truncate());
-var formatTweet = async (markdown, url) => {
-  return remark().use(stripMarkdown).process(markdown).then((file) => (0, import_truncate.default)(String(file).trim(), 260) + "\n\n" + url);
+var formatTweet = async (content3, url) => {
+  const [markdown, ...more] = content3.split("---").slice(2);
+  return remark().use(stripMarkdown).process(markdown).then((file) => {
+    const str = String(file).trim();
+    if (str.length < 260) {
+      if (more.length === 0) {
+        return str;
+      } else {
+        return str + "\n\n" + url;
+      }
+    }
+    return (0, import_truncate.default)(str, 260) + "\n\n" + url;
+  });
 };
 async function run() {
   const files = (0, import_core.getInput)("files");
@@ -11239,9 +11250,8 @@ async function run() {
       return;
     const contents = import_node_fs.default.readFileSync(file, { encoding: "utf-8" });
     const id = import_node_path.default.basename(file).replace(".md", "");
-    const [markdown] = contents.split("---").slice(2);
     const url = `feed.nmoo.dev/p/${id}`;
-    const body = await formatTweet(markdown, url);
+    const body = await formatTweet(contents, url);
     return (0, import_core.setOutput)("body", body);
   }
 }
