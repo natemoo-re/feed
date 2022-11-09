@@ -1,0 +1,45 @@
+---
+import Verified from "../icons/verified.astro";
+import VerifiedLine from "../icons/verified-line.astro";
+---
+
+<span class="verified">
+  <Verified />
+  <VerifiedLine />
+  <span class="double">
+    <VerifiedLine />
+    <Verified />
+  </span>
+</span>
+
+<style>
+  .verified,
+  .double {
+    display: inline-flex;
+    align-items: center;
+    height: 1em;
+  }
+  .verified {
+    color: white;
+    margin-left: 0.125rem;
+    gap: 0.125rem;
+    transform: translateY(0.125rem);
+  }
+  .verified :global(svg) {
+    --size: 1em;
+    width: var(--size);
+    height: var(--size);
+  }
+  .double {
+    position: relative;
+  }
+  .double > :global(:last-child) {
+    position: absolute;
+    transform: scale(0.5);
+    transform-origin: top right;
+    background: var(--color-background);
+    border-radius: 999px;
+    top: -0.05rem;
+    right: -0.05rem;
+  }
+</style>

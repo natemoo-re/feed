@@ -8,6 +8,7 @@ export interface Post {
   name: string;
   data: { title: string, date: Date, draft?: boolean }
   content: string;
+  verified?: boolean;
 }
 
 async function read(dir: URL): Promise<Post[]> {
@@ -24,6 +25,7 @@ async function read(dir: URL): Promise<Post[]> {
           name,
           data,
           content,
+          verified: id === "02vB7q6"
         };
       })
     )

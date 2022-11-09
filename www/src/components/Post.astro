@@ -7,12 +7,13 @@ import CodeBlock from "./CodeBlock.astro";
 import CodeSpan from "./CodeSpan.astro";
 import Card from "./Card.astro";
 import Note from "./Note.astro";
+import Verified from "./Verified.astro";
 import type { Post } from "../utils/data";
 import Separator from "./Separator.astro";
 import { isSinglePost } from "../utils/request";
 
 interface Props extends Post {}
-const { content, data, name, id } = Astro.props;
+const { verified = false, content, data, name, id } = Astro.props;
 
 let useLink = true;
 if (isSinglePost(Astro.request)) {
@@ -26,7 +27,7 @@ const multi = content.split("---").length > 1;
   <Avatar />
   <main>
     <div class="author">
-      <span class="name">{config.profile.name}</span>
+      <span class="name">{config.profile.name}{verified && <Verified />}</span>
       <span class="details">
         <span class="username">@{config.handle}</span>
         <span class="separator"></span>
@@ -36,7 +37,14 @@ const multi = content.split("---").length > 1;
     <div class="body">
       <Markdown
         content={content}
-        components={{ CodeBlock, CodeSpan, Note, hr: Separator, Card }}
+        components={{
+          CodeBlock,
+          CodeSpan,
+          Note,
+          hr: Separator,
+          Card,
+          Verified,
+        }}
       />
     </div>
   </main>
