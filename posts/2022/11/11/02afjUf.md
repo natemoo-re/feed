@@ -14,8 +14,6 @@ date: 2022-11-11T01:37:57Z
 
 🧽 Sanitizer API
 
----
-
 <Card href="https://github.com/natemoo-re/ultrahtml"/>
 
 ---
@@ -27,6 +25,8 @@ It simplifies AST transformations and queries with an extensible `transform` int
 It can handle HTML, but it's loose enough to handle other HTML-like formats such as `.astro`, `.vue`, or `.svelte`. On principle, it doesn't throw on syntax it doesn't recognize.
 
 It treats `<Components />` as valid nodes.
+
+---
 
 It's pretty tiny! The main entrypoint comes in under 2KB, which is a reasonable size for client-side usage.
 
