@@ -10,7 +10,7 @@ date: 2022-11-11T01:37:57Z
 
 💎 JSX Runtime
 
-🔍 Built-in `querySelector` impl
+🔍 Built-in `querySelector` implementation
 
 🧽 Sanitizer API
 
